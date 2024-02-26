@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rahul/side-project/apex
+CMAKE_SOURCE_DIR = /home/rahul/side-project/apex-to-asm-complier
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rahul/side-project/apex/build
+CMAKE_BINARY_DIR = /home/rahul/side-project/apex-to-asm-complier/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rahul/side-project/apex/build/CMakeFiles /home/rahul/side-project/apex/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rahul/side-project/apex-to-asm-complier/build/CMakeFiles /home/rahul/side-project/apex-to-asm-complier/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rahul/side-project/apex/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rahul/side-project/apex-to-asm-complier/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
