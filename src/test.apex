@@ -1,1 +1,1 @@
-debug 10;
+debug(10);
