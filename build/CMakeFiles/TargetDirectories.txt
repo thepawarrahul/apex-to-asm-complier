@@ -1,0 +1,3 @@
+/home/rahul/side-project/apex/build/CMakeFiles/apex.dir
+/home/rahul/side-project/apex/build/CMakeFiles/edit_cache.dir
+/home/rahul/side-project/apex/build/CMakeFiles/rebuild_cache.dir
