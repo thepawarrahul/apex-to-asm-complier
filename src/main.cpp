@@ -92,6 +92,8 @@ std::vector<Token> tokenize(const std::string& str) {
         return tokens;
     }
 }
+
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         std::cerr << "No file passed for execution.." << std::endl;
