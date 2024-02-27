@@ -2,6 +2,7 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
+#include <optional>
 
 enum class TokenType {
     sys_debug,
@@ -93,6 +94,36 @@ std::vector<Token> tokenize(const std::string& str) {
     }
 }
 
+std::string tokens_to_asm(const std::vector<Token>& tokens) {
+    std::stringstream output;
+
+    output << "global _start\n";
+    output << "section .data\n";
+
+    for (int i = 0; i< tokens.size(); i++) { 
+        const Token& token = tokens.at(i);
+
+        if (token.type == TokenType::sys_debug) {
+            if (i + 1 < tokens.size() && tokens.at(i + 1).type==TokenType::open_par) {
+                if (i + 2 < tokens.size() && tokens.at(i + 2).type == TokenType::init_lit) {
+                    output << "    num db \'" << tokens.at(i+2).value << "\', 0xa\n";
+                }
+            }
+        }
+    }
+
+    output << "section .text\n_start:\n";
+    output << "   mov rax, 1\n";
+    output << "   mov rdi, 1\n";
+    output << "   mov rsi, num\n";
+    output << "   mov rdx, 3\n";
+    output << "   syscall\n";
+    output << "   mov rax, 60\n";
+    output << "   mov rdi, rdi\n";
+    output << "   syscall\n";
+
+    return output.str(); 
+} 
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
@@ -109,8 +140,16 @@ int main(int argc, char* argv[]) {
 
     std::string contents = contents_stream.str();
 
-    tokenize(contents);
+    std::vector<Token> tokens = tokenize(contents);
 
-    std::cout << contents << std::endl;
+    {
+        std::fstream file("./out.asm", std::ios::out);
+        file << tokens_to_asm(tokens);
+    }
+    
+    system("nasm -felf64 out.asm -o out.o");
+    system("ld out.o -o out");
+    system("./out");
+
     return EXIT_SUCCESS;
 }
